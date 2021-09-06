@@ -1,3 +1,60 @@
+# Implementation Details:
+
+## Architecture Diagram
+
+## Datastream API
+- `GET /v1/data` -> returns the data that has been fetch from the external API
+- `POST /v1/worker` -> creates a worker for the `url` mentioned in the body for mentioned `frequency`.
+  ```
+  {
+    url: "www.foo.bar"
+    frequency: "EVERY_5_SECONDS"
+  }
+  ```
+  Note: List of accepted `frequency` are [here](https://github.com/nestjs/schedule/blob/master/lib/enums/cron-expression.enum.ts)
+- `DELETE /v1/worker` -> deletes the worker created by the post request.
+
+## How to run
+
+## Assumptions
+- DataModel of the API will be decided in the future. So, all the data fetched is just in-memory. Persistance solution can be decided once data contract is finalised.
+- Every url will have only one cron scheduled at any given point in time.
+- Once a API makes a POST request, we don't want to lose the data. Hence Rabbit MQ.
+- Using the nestjs default logging mechanism. We can push to ELK or Cloudwatch or Datadog. This will be decided in the future.
+- Deployment strategy will be decided in the future.
+
+## Trade Offs
+
+- ### API Design: Env variables vs REST
+   - Hardcoding the external API's didn't seem like a long term solution for me. Any small change to the URL's will need a deployment. Moreover, when the number of         external APIs increase it becomes very difficult to manage them. 
+   - The current mechanism will enable us to create cron jobs without making any changes to the code.
+   - Any frequency can be set to the cron. If `PUT` is exposed we can edit the frequency as well.
+    
+
+-  ### TCP vs RabbitMQ vs Kafka
+    - Reliability is one of out Non functional requirements. We do not want to lost the data once an API call is made.
+    - Pub/Sub gives us the necessary infra to scale in the future.
+    - I believe, RabbitMQ is light weight and is go-to small projects and POC's. Moreover, Nestjs kafka tranporter is still in experimental stages.
+
+- ### Database
+  - We cannot decide on the persistance of data before finalizing the data contract. So I decided to use in-memory
+
+- ### Exception Handling
+  - Similar to what was mentioned before, we need to decide on the logging and monitoring aspects of the system. This will enable us to capture the exception in meaningful format.
+  - Currently, we are just logging the exceptions.
+
+
+## Fututre Work
+- Add tests
+- API versioning
+- Instead of hardcoding the cron name in the registry use hash to generate one.
+- Delete API should call out the cron to be deleted.
+- RabbitMQ acknowlegment
+- Transformation to Response received from the external API
+- Application Logs & Monitoring
+
+
+------------
 # Welcome to Welds coding-challenge
 
 ## Introduction
