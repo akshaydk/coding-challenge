@@ -20,7 +20,7 @@ export class WorkerService {
 
       let data: CreateWorkerDto = JSON.parse(body);
       const job = new CronJob(
-        CronExpression.EVERY_5_SECONDS,
+        CronExpression[data['frequency']],
         async () => await this.fetch(data['url']),
       );
 
