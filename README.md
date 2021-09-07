@@ -56,6 +56,9 @@ yarn start worker
 - ### Docker
   - For the sake of assignment I didn't want to get into the containarizing the application. Ideally, I would be inclined to containarize any application that goes to production.
 
+- ### Specs
+  - I was able to get `app.controller.spec.ts` to run successfuly with three unit tests. I need more time to understand the NestJS framework in-depth to be able to handle all the injections properly within my specs. Currently, none of the business logic written here is tested. Nevertheless, with more time in hand I can figure it out. 
+
 
 ## Fututre Work
 - Add tests
