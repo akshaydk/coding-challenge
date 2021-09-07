@@ -15,10 +15,18 @@
 - `DELETE /v1/worker` -> deletes the worker created by the post request.
 
 ## How to run
+```
+//For data stream API
+yarn start 
+
+//To start the worker
+yarn start worker
+```
 
 ## Assumptions
 - DataModel of the API will be decided in the future. So, all the data fetched is just in-memory. Persistance solution can be decided once data contract is finalised.
 - Every url will have only one cron scheduled at any given point in time.
+- We are not performiny any checks which fetching the data from External API. Assumption is that it returns JSON and we have access to the API.
 - Once a API makes a POST request, we don't want to lose the data. Hence Rabbit MQ.
 - Using the nestjs default logging mechanism. We can push to ELK or Cloudwatch or Datadog. This will be decided in the future.
 - Deployment strategy will be decided in the future.
@@ -42,6 +50,9 @@
 - ### Exception Handling
   - Similar to what was mentioned before, we need to decide on the logging and monitoring aspects of the system. This will enable us to capture the exception in meaningful format.
   - Currently, we are just logging the exceptions.
+
+- ### Docker
+  - For the sake of assignment I didn't want to get into the containarizing the application. Ideally, I would be inclined to containarize any application that goes to production.
 
 
 ## Fututre Work
