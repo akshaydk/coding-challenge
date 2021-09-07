@@ -9,9 +9,7 @@ const initMicroservice = async (app: INestApplication) => {
     options: {
       urls: ['amqp://localhost:5672'],
       queue: 'data',
-      queueOptions: {
-        durable: false,
-      },
+      noAck:false,
     },
   });
   await app.startAllMicroservicesAsync();

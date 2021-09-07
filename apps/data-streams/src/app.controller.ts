@@ -12,7 +12,7 @@ export class AppController {
   //ToDo: Return the data
   @Get('/data')
   get() {
-    return this.data
+    return this.getData()
   }
 
   @Post('/worker')
@@ -29,6 +29,13 @@ export class AppController {
   //ToDo: Save the data
   @EventPattern('data')
   handleDataEvent(@Payload() payload, @Ctx() context: RmqContext) {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
     this.data.push(payload)
+    channel.ack(message);
+  }
+
+  getData(): {} {
+    return this.data
   }
 }

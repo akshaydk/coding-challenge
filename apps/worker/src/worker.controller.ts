@@ -5,15 +5,20 @@ import { WorkerService } from './worker.service';
 @Controller()
 export class WorkerController {
   constructor(private readonly workerService: WorkerService) {}
- 
-  //ToDo: We could add more RabbitMQ specific operations here.
+
   @MessagePattern('add')
   addWorker(@Payload() payload, @Ctx() context: RmqContext) {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
     this.workerService.add(payload)
+    channel.ack(message);
   }
 
   @MessagePattern('remove')
   removeWorker(@Ctx() context: RmqContext) {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
     this.workerService.remove()
+    channel.ack(message);
   }
 }

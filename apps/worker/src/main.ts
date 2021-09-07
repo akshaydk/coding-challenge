@@ -10,9 +10,7 @@ async function bootstrap() {
       options: {
         urls: ['amqp://localhost:5672'], // Can be picked up from environment variables.
         queue: 'worker',
-        queueOptions: {
-          durable: false,
-        },
+        noAck:false,
       },
     },
   );

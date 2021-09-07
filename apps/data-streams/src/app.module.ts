@@ -12,9 +12,7 @@ import { AppService } from './app.service';
         options: {
           urls: ['amqp://localhost:5672'],
           queue: 'worker',
-          queueOptions: {
-            durable: false,
-          },
+          noAck: false,
         },
       },
     ]),
