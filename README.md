@@ -65,6 +65,7 @@ yarn start worker
 
 ## Fututre Work
 - Add tests
+- Do not hard code URLs, use environment variables.
 - Instead of hardcoding the cron name in the registry use hash to generate one.
 - Delete API should call out the cron to be deleted.
 - Transformation to Response received from the external API
