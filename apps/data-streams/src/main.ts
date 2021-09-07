@@ -17,6 +17,7 @@ const initMicroservice = async (app: INestApplication) => {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api/v1');
   initMicroservice(app);
   await app.listen(3000);
 }
