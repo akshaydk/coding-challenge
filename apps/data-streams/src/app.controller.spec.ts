@@ -1,3 +1,4 @@
+import { ClientsModule, Transport } from '@nestjs/microservices';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,7 +8,20 @@ describe('AppController', () => {
   let appService: AppService;
 
   beforeEach(async () => {
+    // There should be a better way to handle the imports
     const app: TestingModule = await Test.createTestingModule({
+      imports: [
+        ClientsModule.register([
+        {
+          name: 'WorkerService',
+          transport: Transport.RMQ,
+          options: {
+            urls: ['amqp://localhost:5672'],
+            queue: 'worker',
+            noAck: false,
+          },
+        },
+      ]),],
       controllers: [AppController],
       providers: [AppService],
     }).compile();
@@ -41,7 +55,7 @@ describe('AppController', () => {
       expect(service).toHaveBeenCalledTimes(1);
     });
 
-    it('should add a worker', () => {
+    it('should delete a worker', () => {
       let service = jest
         .spyOn(appService, 'deleteWorker')
         .mockImplementationOnce(() => {});
