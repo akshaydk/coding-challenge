@@ -2,6 +2,8 @@
 
 ## Architecture Diagram
 
+![Web App Reference Architecture](https://user-images.githubusercontent.com/13963969/132289856-b6f1ec7e-278e-49d4-a0b5-7b593ec6e373.png)
+
 ## Datastream API
 - `GET /v1/data` -> returns the data that has been fetch from the external API
 - `POST /v1/worker` -> creates a worker for the `url` mentioned in the body for mentioned `frequency`.
