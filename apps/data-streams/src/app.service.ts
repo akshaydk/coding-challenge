@@ -8,9 +8,7 @@ export class AppService {
     @Inject('WorkerService') private readonly clientProxy: ClientProxy,
   ) {}
 
-  //ToDo: We could add more RabbitMQ specific operations here. Sending Ack and more.
   addWorker(body: CreateWorkerDto): void {
-    console.log('Emitting an event');
     this.clientProxy.emit('add', JSON.stringify(body));
   }
 
