@@ -62,7 +62,6 @@ yarn start worker
 - API versioning
 - Instead of hardcoding the cron name in the registry use hash to generate one.
 - Delete API should call out the cron to be deleted.
-- RabbitMQ acknowlegment
 - Transformation to Response received from the external API
 - Application Logs & Monitoring
 
