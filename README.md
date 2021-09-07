@@ -63,7 +63,7 @@ yarn start worker
 - Delete API should call out the cron to be deleted.
 - Transformation to Response received from the external API
 - Application Logs & Monitoring
-
+- Hot Reload for better developer experience.
 
 ------------
 # Welcome to Welds coding-challenge
